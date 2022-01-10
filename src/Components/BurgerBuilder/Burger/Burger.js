@@ -1,14 +1,19 @@
 import React from "react";
 import Ingredient from "../Ingredient/Ingredient";
 import * as IngredientType from "../Ingredient/IngredientType";
+import "./Burger.css";
 
 const Burger = (props) => {
+  let inGredientArry = props.inGredient.map((item) => {
+    let amountArry = [...Array(item.amount).keys()];
+    return amountArry.map((_) => {
+      return <Ingredient type={item.type} key={Math.random()} />;
+    });
+  });
   return (
-    <div>
+    <div className="burger">
       <Ingredient type={IngredientType.breadTop} />
-      <Ingredient type={IngredientType.Cheese} />
-      <Ingredient type={IngredientType.Salad} />
-      <Ingredient type={IngredientType.Meat} />
+      {inGredientArry}
       <Ingredient type={IngredientType.breadBottom} />
     </div>
   );
