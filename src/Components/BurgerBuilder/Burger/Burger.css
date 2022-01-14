@@ -6,5 +6,13 @@
 }
 
 .burger::-webkit-scrollbar {
-  display: none;
+  width: 4px;
+  transition: 0.5s;
+}
+.burger::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+.burger::-webkit-scrollbar-thumb {
+  background: rgb(230, 24, 86);
+  border-radius: 2px;
 }

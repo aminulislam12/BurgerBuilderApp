@@ -1,6 +1,5 @@
 import React from "react";
 import "./intredient.css";
-import * as IngredientType from "./IngredientType";
 import breadTop from "../../assets/images/top.png";
 import breadBottom from "../../assets/images/bottom.png";
 import Meat from "../../assets/images/meat.png";
@@ -10,35 +9,35 @@ import cheese from "../../assets/images/cheese.png";
 const Ingredient = (props) => {
   let Ingredient = null;
   switch (props.type) {
-    case IngredientType.breadTop:
+    case "breadTop":
       Ingredient = (
         <div>
           <img src={breadTop} alt="breadTop" />
         </div>
       );
       break;
-    case IngredientType.breadBottom:
+    case "breadBottom":
       Ingredient = (
         <div>
           <img src={breadBottom} alt="breadBottom" />
         </div>
       );
       break;
-    case IngredientType.Meat:
+    case "Meat":
       Ingredient = (
         <div>
           <img src={Meat} alt="Meat" />
         </div>
       );
       break;
-    case IngredientType.Salad:
+    case "Salad":
       Ingredient = (
         <div>
           <img src={Salad} alt="Salad" />
         </div>
       );
       break;
-    case IngredientType.Cheese:
+    case "Cheese":
       Ingredient = (
         <div>
           <img src={cheese} alt="cheese" />
