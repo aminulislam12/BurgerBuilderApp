@@ -1,5 +1,6 @@
 import React from "react";
-import { Nav, Navbar, NavbarBrand, NavItem, NavLink } from "reactstrap";
+import { Nav, Navbar, NavbarBrand, NavItem } from "reactstrap";
+import { NavLink } from "react-router-dom";
 import Logo from "../assets/images/logo.png";
 
 const Header = () => {
@@ -18,7 +19,14 @@ const Header = () => {
           </NavbarBrand>
           <Nav className="" navbar>
             <NavItem>
-              <NavLink href="/">SomeThing</NavLink>
+              <NavLink exact to="/" className="nav-link fw-bold">
+                BurgerBuilder
+              </NavLink>
+            </NavItem>
+            <NavItem>
+              <NavLink exact to="/order" className="nav-link fw-bold">
+                Order
+              </NavLink>
             </NavItem>
           </Nav>
         </div>
