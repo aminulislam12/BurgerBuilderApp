@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Button, Modal, ModalBody, ModalFooter, ModalHeader } from "reactstrap";
 import Burger from "./Burger/Burger";
 import Control from "./Control/Control";
+import Summary from "./Summary/Summary";
 
 const IngredientPrice = {
   Salad: 20,
@@ -17,6 +18,15 @@ export default class BurgerBuilder extends Component {
     ],
     totalPrice: 80,
     modalOpen: false,
+    purchesable: false,
+  };
+  updatePurchesable = (Ingredient) => {
+    const sum = Ingredient.reduce((sum, element) => {
+      return sum + element.amount;
+    }, 0);
+    this.setState({
+      purchesable: sum > 0,
+    });
   };
   addIngredientHandle = (type) => {
     const Ingredient = [...this.state.inGredient];
@@ -25,6 +35,7 @@ export default class BurgerBuilder extends Component {
       if (item.type === type) item.amount++;
     }
     this.setState({ inGredient: Ingredient, totalPrice: newPrice });
+    this.updatePurchesable(Ingredient);
   };
   removeIngredientHandle = (type) => {
     const indgredient = [...this.state.inGredient];
@@ -36,6 +47,7 @@ export default class BurgerBuilder extends Component {
       }
     }
     this.setState({ inGredient: indgredient, totalPrice: newPrice });
+    this.updatePurchesable(indgredient);
   };
   toggleModal = () => {
     this.setState({
@@ -56,14 +68,16 @@ export default class BurgerBuilder extends Component {
                 inGredientRemove={this.removeIngredientHandle}
                 price={this.state.totalPrice}
                 toggleModal={this.toggleModal}
+                purchesable={this.state.purchesable}
               />
             </div>
           </div>
         </div>
         <Modal isOpen={this.state.modalOpen}>
-          <ModalHeader>Your Summary</ModalHeader>
+          <ModalHeader>Your Order Summary</ModalHeader>
           <ModalBody>
             <h6>Price:{this.state.totalPrice.toFixed(0)} BDT</h6>
+            <Summary inGredient={this.state.inGredient} />
           </ModalBody>
           <ModalFooter>
             <Button color="success">Continue To Checkout</Button>
