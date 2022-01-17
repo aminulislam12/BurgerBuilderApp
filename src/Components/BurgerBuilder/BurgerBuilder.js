@@ -3,51 +3,39 @@ import { Button, Modal, ModalBody, ModalFooter, ModalHeader } from "reactstrap";
 import Burger from "./Burger/Burger";
 import Control from "./Control/Control";
 import Summary from "./Summary/Summary";
+import { connect } from "react-redux";
+import {
+  addIngradient,
+  removeIngredient,
+  updatePurchesable,
+} from "../redux/actionCreators";
 
-const IngredientPrice = {
-  Salad: 20,
-  Cheese: 40,
-  Meat: 20,
+const mapStateToProps = (state) => {
+  return {
+    inGredient: state.inGredient,
+    totalPrice: state.totalPrice,
+    purchesable: state.purchesable,
+  };
 };
-export default class BurgerBuilder extends Component {
+const mapdispatchToprops = (dispatch) => {
+  return {
+    addIngradient: (ingtype) => dispatch(addIngradient(ingtype)),
+    removeIngredient: (ingtype) => dispatch(removeIngredient(ingtype)),
+    updatePurchesable: () => dispatch(updatePurchesable()),
+  };
+};
+class BurgerBuilder extends Component {
   state = {
-    inGredient: [
-      { type: "Salad", amount: 0 },
-      { type: "Cheese", amount: 0 },
-      { type: "Meat", amount: 0 },
-    ],
-    totalPrice: 80,
     modalOpen: false,
-    purchesable: false,
   };
-  updatePurchesable = (Ingredient) => {
-    const sum = Ingredient.reduce((sum, element) => {
-      return sum + element.amount;
-    }, 0);
-    this.setState({
-      purchesable: sum > 0,
-    });
-  };
+
   addIngredientHandle = (type) => {
-    const Ingredient = [...this.state.inGredient];
-    const newPrice = this.state.totalPrice + IngredientPrice[type];
-    for (let item of Ingredient) {
-      if (item.type === type) item.amount++;
-    }
-    this.setState({ inGredient: Ingredient, totalPrice: newPrice });
-    this.updatePurchesable(Ingredient);
+    this.props.addIngradient(type);
+    this.props.updatePurchesable();
   };
   removeIngredientHandle = (type) => {
-    const indgredient = [...this.state.inGredient];
-    const newPrice = this.state.totalPrice - IngredientPrice[type];
-    for (let item of indgredient) {
-      if (item.type === type) {
-        if (item.amount <= 0) return;
-        item.amount--;
-      }
-    }
-    this.setState({ inGredient: indgredient, totalPrice: newPrice });
-    this.updatePurchesable(indgredient);
+    this.props.removeIngredient(type);
+    this.props.updatePurchesable();
   };
   toggleModal = () => {
     this.setState({
@@ -58,20 +46,21 @@ export default class BurgerBuilder extends Component {
     this.props.history.push("/checkout");
   };
   render() {
+    console.log(this.props);
     return (
       <div>
         <div className="container-fluid my-3">
           <div className="row">
             <div className="col-md-6 col-sm-12">
-              <Burger inGredient={this.state.inGredient} />
+              <Burger inGredient={this.props.inGredient} />
             </div>
             <div className="col-md-6 col-sm-12">
               <Control
                 inGredientAdded={this.addIngredientHandle}
                 inGredientRemove={this.removeIngredientHandle}
-                price={this.state.totalPrice}
+                price={this.props.totalPrice}
                 toggleModal={this.toggleModal}
-                purchesable={this.state.purchesable}
+                purchesable={this.props.purchesable}
               />
             </div>
           </div>
@@ -79,8 +68,8 @@ export default class BurgerBuilder extends Component {
         <Modal isOpen={this.state.modalOpen}>
           <ModalHeader>Your Order Summary</ModalHeader>
           <ModalBody>
-            <h6>Price:{this.state.totalPrice.toFixed(0)} BDT</h6>
-            <Summary inGredient={this.state.inGredient} />
+            <h6>Price:{this.props.totalPrice.toFixed(0)} BDT</h6>
+            <Summary inGredient={this.props.inGredient} />
           </ModalBody>
           <ModalFooter>
             <Button color="success" onClick={this.handleCheckout}>
@@ -95,3 +84,5 @@ export default class BurgerBuilder extends Component {
     );
   }
 }
+
+export default connect(mapStateToProps, mapdispatchToprops)(BurgerBuilder);

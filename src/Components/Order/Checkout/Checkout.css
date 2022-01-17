@@ -1,0 +1,43 @@
+.checkoutform {
+  display: flex;
+  justify-content: center;
+}
+.form {
+  width: 550px;
+  min-height: 400px;
+  border: 1.5px solid #d70f64;
+  padding: 10px;
+  border-radius: 8px;
+  background-color: #fff;
+}
+.my-btn {
+  padding-left: 80px;
+  padding-right: 80px;
+
+  outline: none;
+}
+.success {
+  background-color: #d70f64 !important;
+  border-color: #d70f64 !important;
+}
+.btn-c {
+  font-weight: bold;
+}
+
+.payment {
+  width: 550px;
+  border: 1.5px solid #d70f64;
+  padding: 10px;
+  border-radius: 8px;
+  background-color: #fff;
+}
+.payment h4 {
+  font-weight: 700;
+}
+.form-control:focus {
+  color: #212529;
+  background-color: #fff;
+  border-color: #d70f64 !important;
+  outline: 0;
+  box-shadow: 0 0 0 0.2px #d70f64 !important;
+}

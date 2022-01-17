@@ -2,17 +2,12 @@ import React from "react";
 import { Nav, Navbar, NavbarBrand, NavItem } from "reactstrap";
 import { NavLink } from "react-router-dom";
 import Logo from "../assets/images/logo.png";
+import "./header.css";
 
 const Header = () => {
   return (
     <div>
-      <Navbar
-        color="light"
-        expand="md"
-        light
-        className="Navigation"
-        container={false}
-      >
+      <Navbar expand="md" light className="Navigation" container={false}>
         <div className="container">
           <NavbarBrand>
             <img src={Logo} alt="Logo" width="120px" />

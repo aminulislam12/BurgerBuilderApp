@@ -1,0 +1,10 @@
+.Navigation {
+  background-color: #d70f64;
+}
+.navbar-light .navbar-nav .nav-link {
+  color: #fff !important;
+}
+
+.navbar-light .navbar-nav .nav-link.active {
+  color: black !important;
+}
