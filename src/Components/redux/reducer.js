@@ -48,6 +48,17 @@ export const reducer = (state = INITIAL_STATE, action) => {
         ...state,
         purchesable: sum > 0,
       };
+    case ActionType.RESET_INGREDIENT:
+      return {
+        ...state,
+        inGredient: [
+          { type: "Salad", amount: 0 },
+          { type: "Cheese", amount: 0 },
+          { type: "Meat", amount: 0 },
+        ],
+        totalPrice: 80,
+        purchesable: false,
+      };
     default:
       return state;
   }

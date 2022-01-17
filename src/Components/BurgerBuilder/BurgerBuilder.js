@@ -73,7 +73,7 @@ class BurgerBuilder extends Component {
           </ModalBody>
           <ModalFooter>
             <Button color="success" onClick={this.handleCheckout}>
-              Continue To Checkout
+              <i className="fa fa-shopping-cart"></i> Continue To Checkout
             </Button>
             <Button color="danger" onClick={this.toggleModal}>
               Cancle

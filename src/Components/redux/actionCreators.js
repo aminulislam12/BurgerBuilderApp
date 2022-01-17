@@ -19,3 +19,9 @@ export const updatePurchesable = () => {
     type: ActionType.UPDATE_PURCHESABLE,
   };
 };
+
+export const resetIngredient = () => {
+  return {
+    type: ActionType.RESET_INGREDIENT,
+  };
+};

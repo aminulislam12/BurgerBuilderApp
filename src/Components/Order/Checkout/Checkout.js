@@ -4,6 +4,7 @@ import "./Checkout.css";
 import { connect } from "react-redux";
 import axios from "axios";
 import Spiner from "../../Spiner/Spiner";
+import { resetIngredient } from "../../redux/actionCreators";
 
 const mapStatetoProps = (state) => {
   return {
@@ -13,6 +14,11 @@ const mapStatetoProps = (state) => {
   };
 };
 
+const mapDispatchToprops = (dispatch) => {
+  return {
+    resetIngredient: () => dispatch(resetIngredient()),
+  };
+};
 class Checkout extends Component {
   state = {
     value: {
@@ -59,13 +65,14 @@ class Checkout extends Component {
           this.setState({
             isLoading: false,
             isModalOpen: true,
-            modalMesg: "Order Plasced Successfully !",
+            modalMesg: `Order Plasced Successfully !`,
           });
+          this.props.resetIngredient();
         } else {
           this.setState({
             isLoading: false,
             isModalOpen: true,
-            modalMesg: "Something Want to wrong ! Order Again!",
+            modalMesg: `Something Want to wrong ! Order Again!`,
           });
         }
       })
@@ -73,9 +80,7 @@ class Checkout extends Component {
         this.setState({
           isLoading: false,
           isModalOpen: true,
-          modalMesg: `<span>${"&times"}<span>${
-            error.message
-          } Reconnecting to your Wi-Fi`,
+          modalMesg: `${error.message} Reconnecting to your Wi-Fi`,
         });
         console.log(error.message);
       });
@@ -151,11 +156,13 @@ class Checkout extends Component {
         <div>{this.state.isLoading ? <Spiner /> : form}</div>
         <Modal isOpen={this.state.isModalOpen} onClick={this.goBack}>
           <ModalBody>
-            <p>{this.state.modalMesg}</p>
+            <p className="text-success fw-bold my-2 icon">
+              {this.state.modalMesg}
+            </p>
           </ModalBody>
         </Modal>
       </>
     );
   }
 }
-export default connect(mapStatetoProps)(Checkout);
+export default connect(mapStatetoProps, mapDispatchToprops)(Checkout);
