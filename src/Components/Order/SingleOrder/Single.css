@@ -1,0 +1,20 @@
+.showOrder {
+  border: 1px solid #d70a70;
+  border-radius: 5px;
+  padding: 10px;
+  margin-bottom: 8px;
+}
+.items {
+  border: 1.3px solid #d70a70;
+  border-radius: 5px;
+  margin-bottom: 8px;
+  margin-right: 5px;
+  padding: 5px;
+  cursor: pointer;
+  font-weight: 500;
+}
+.items:hover {
+  background-color: #d70a70;
+  color: #fff;
+  transition: 0.5s;
+}

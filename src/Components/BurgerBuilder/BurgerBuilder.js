@@ -9,7 +9,6 @@ import {
   removeIngredient,
   updatePurchesable,
 } from "../redux/actionCreators";
-
 const mapStateToProps = (state) => {
   return {
     inGredient: state.inGredient,
@@ -46,7 +45,6 @@ class BurgerBuilder extends Component {
     this.props.history.push("/checkout");
   };
   render() {
-    console.log(this.props);
     return (
       <div>
         <div className="container-fluid my-3">
@@ -61,6 +59,7 @@ class BurgerBuilder extends Component {
                 price={this.props.totalPrice}
                 toggleModal={this.toggleModal}
                 purchesable={this.props.purchesable}
+                inGredient={this.props.inGredient}
               />
             </div>
           </div>

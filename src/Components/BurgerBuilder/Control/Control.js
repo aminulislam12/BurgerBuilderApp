@@ -6,7 +6,7 @@ const control = [
   { lable: "Cheese", type: "Cheese" },
   { lable: "Meat", type: "Meat" },
 ];
-const BuildControl = (props) => {
+export const BuildControl = (props) => {
   return (
     <div className="d-flex justify-content-between">
       <div className="mr-auto ml-5 fw-bold">{props.lable}</div>
@@ -21,7 +21,6 @@ const BuildControl = (props) => {
     </div>
   );
 };
-
 const Control = (props) => {
   return (
     <div>
@@ -38,6 +37,7 @@ const Control = (props) => {
                 key={Math.random()}
                 added={() => props.inGredientAdded(item.type)}
                 remove={() => props.inGredientRemove(item.type)}
+                ingCount={props.inGredient}
               />
             );
           })}
